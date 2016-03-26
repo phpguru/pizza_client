@@ -19,6 +19,12 @@ $app->get('/', function () use ($app) {
     ));
 });
 
+$app->get('/help', function () use ($app) {
+    return $app['twig']->render('help.twig', array(
+        'nav' => ''
+    ));
+});
+
 $app->get('/hello/{name}', function ($name) use ($app) {
     if (!$name) {
         $error = array('message' => 'The user was not found.');
