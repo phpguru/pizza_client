@@ -3,7 +3,26 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
+    font-family: 'Quicksand', sans-serif;
+}
 
+h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 700;
+}
+
+.btn-orange {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+    background-image: -webkit-linear-gradient(top,#FF5300 0, #ff7f00 100%);
+    background-image: -o-linear-gradient(top,#FF5300 0,#ff7f00 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#FF5300),to(#ff7f00));
+    background-image: linear-gradient(to bottom,#FF5300 0,#ff7f00 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5300', endColorstr='#ff7f00', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: #ff7f00
+}
 
 
 

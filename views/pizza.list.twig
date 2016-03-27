@@ -1,12 +1,24 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-    <h2>Pizza List</h2>
-    <ul>
-        {% for pizza in pizzas %}
-            {% if pizza.name is not empty %}
-            <li><strong>{{ pizza.name|lower|title }}</strong> <em>{{ pizza.description }}</em> 
-            {% endif %}
-        {% endfor %}
-    </ul>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-1 col-lg-offset-11">
+                <a class="btn btn-orange" href="/pizza/create" role="button">Create a Pizza</a>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1">
+                <h1>Pizza List</h1>
+                <ul>
+                    {% for pizza in pizzas %}
+                        {% if pizza.name is not empty %}
+                        <li><strong>{{ pizza.name|lower|title }}</strong> <em>{{ pizza.description }}</em> 
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-1 col-lg-offset-11">
+                <a class="btn btn-orange" href="/pizza/create" role="button">Create a Pizza</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
