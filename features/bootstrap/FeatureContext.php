@@ -5,7 +5,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Tester\Exception\PendingException;
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\RawMinkContext;
 
 //
 // Require 3rd-party libraries here:
@@ -17,7 +17,7 @@ use Behat\MinkExtension\Context\MinkContext;
 /**
  * Features context.
  */
-class FeatureContext implements Context, SnippetAcceptingContext 
+class FeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext 
 {
     /**
      * Initializes context.
@@ -35,7 +35,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iAmSignedIn()
     {
-        throw new PendingException();
+        return true;
     }
 
     /**
@@ -43,7 +43,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeAListOfPizzasIMadeBefore()
     {
-        throw new PendingException();
+        //throw new PendingException();
+        echo "Pizza List";
     }
     
     /**
@@ -51,7 +52,19 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeNameAndDescriptionField()
     {
-        throw new PendingException();
+        $page = $this->getSession()->getPage();
+        $pizzaForm = $page->find('xpath', '//form[@id="createpizza"]');
+        if (null === $pizzaForm) {
+            throw new \Exception('The createpizza form is not found');
+        }
+        $nameField = $pizzaForm->findField('name');
+        if (null === $nameField) {
+            throw new \Exception('The name field is not found');
+        }
+        $descriptionField = $pizzaForm->findField('description');
+        if (null === $descriptionField) {
+            throw new \Exception('The description field is not found');
+        }
     }
 
 
