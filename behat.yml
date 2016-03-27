@@ -4,5 +4,6 @@ default:
         bootstrap: %behat.paths.features%/bootstrap
     extensions:
         Behat\MinkExtension\Extension:
+            base_url: http://pizza.dev:81
             goutte: ~
             selenium2: ~

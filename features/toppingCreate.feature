@@ -5,6 +5,6 @@ Feature: Create a new Topping
 
    Scenario: Creating a topping
       Given I am signed in
-      When I go to "http://pizza.dev:81/topping/create"
+      When I go to "/topping/create"
       Then I should see a form to create a new topping
 

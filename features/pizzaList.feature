@@ -5,5 +5,5 @@ Feature: A list of pizzas
 
    Scenario: Viewing pizza list
       Given I am signed in
-      When I go to "http://pizza.dev:81/pizza/list"
+      When I go to "/pizza/list"
       Then I should see a list of pizzas I made before.

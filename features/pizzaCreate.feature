@@ -5,5 +5,5 @@ Feature: Create a pizza
 
    Scenario: Creating a pizza
       Given I am signed in
-      When I go to "http://pizza.dev:81/pizza/create"
+      When I go to "/pizza/create"
       Then I should see name and description field

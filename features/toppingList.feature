@@ -5,6 +5,6 @@ Feature: A list of toppings
 
    Scenario: Viewing topping list
       Given I am signed in
-      When I go to "http://pizza.dev:81/topping/list"
+      When I go to "/topping/list"
       Then I should see a list of toppings available
 
