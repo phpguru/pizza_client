@@ -3,16 +3,12 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-1">
+            <div class="col-lg-6 col-lg-offset-1">
                 <h1>Pizza List</h1>
                 <ul>
                     {% for pizza in pizzas %}
                         {% if pizza.name is not empty %}
-                            {% if pizza.id in mypizzas %}
-                                <li>{{ pizza.id }}) <strong><a href="/pizza/edit/{{pizza.id}}">{{ pizza.name|lower|title }}</a></strong> <em>{{ pizza.description }}</em>
-                            {% else %}
-                                <li>{{ pizza.id }}) <strong>{{ pizza.name|lower|title }}</strong> <em>{{ pizza.description }}</em>
-                            {% endif %}
+                            <li>{{ pizza.id }}) <strong><a href="/pizza/edit/{{pizza.id}}">{{ pizza.name|lower|title }}</a></strong> <em>{{ pizza.description }}</em>
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -20,9 +16,15 @@
             <div class="col-lg-1 col-lg-offset-1">
                 <a class="btn btn-orange" href="/pizza/new" role="button">Create a Pizza</a>
             </div>
+            <div class="col-lg-1 col-lg-offset-1">
+                <a class="btn btn-orange" href="/topping/new" role="button">Create a Topping</a>
+            </div>
         </div>
-        <div class="col-lg-1 col-lg-offset-11">
+        <div class="col-lg-1 col-lg-offset-9">
             <a class="btn btn-orange" href="/pizza/new" role="button">Create a Pizza</a>
+        </div>
+        <div class="col-lg-1 col-lg-offset-1">
+            <a class="btn btn-orange" href="/topping/new" role="button">Create a Topping</a>
         </div>
     </div>
 {% endblock %}

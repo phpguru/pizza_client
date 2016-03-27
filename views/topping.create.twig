@@ -32,13 +32,13 @@ $(document).ready(function () {
     var name = $('#name').val();
         var message = '';
         if (name==='') {
-            message = 'A topping with no name? What does null taste like? Provide a topping so we can get going.';
+            message = 'What, exactly, does <code>null</code> taste like? Provide a topping so we can get going.';
             BootstrapDialog.show({
-                title: 'Shucks!',
+                title: 'Boring!',
                 type: BootstrapDialog.TYPE_WARNING,
                 message: message,
                 buttons: [{
-                    label: 'Makes sense',
+                    label: 'I\'ll try harder',
                     action: function(dialog) {
                         dialog.close();
                     }
