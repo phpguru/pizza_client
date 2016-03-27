@@ -3,6 +3,7 @@ Feature: Add/Edit pizza toppings
    As a builder
    I should be able to add a topping to a pizza
 
+   @javascript
    Scenario: Improving a pizza
       Given I am signed in
       And I have selected a pizza I created

@@ -3,6 +3,7 @@ Feature: A list of toppings
    As a builder
    I should be able to list the toppings I can to add to a Pizza
 
+   @javascript
    Scenario: Viewing topping list
       Given I am signed in
       When I go to "/topping/list"

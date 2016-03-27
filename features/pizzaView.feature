@@ -3,6 +3,7 @@ Feature: Show pizza toppings
    As a builder
    I should be able to list the toppings on the selected Pizza
 
+   @javascript
    Scenario: Viewing a selected pizza
       Given I am signed in
       And I have selected a pizza I created

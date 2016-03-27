@@ -1,11 +1,10 @@
 <?php
 
-use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Context\Context;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\MinkExtension\Context\MinkContext;
 
 //
@@ -18,7 +17,7 @@ use Behat\MinkExtension\Context\MinkContext;
 /**
  * Features context.
  */
-class FeatureContext extends MinkContext
+class FeatureContext implements Context, SnippetAcceptingContext 
 {
     /**
      * Initializes context.
@@ -26,7 +25,7 @@ class FeatureContext extends MinkContext
      *
      * @param array $parameters context parameters (set them up through behat.yml)
      */
-    public function __construct(array $parameters)
+    public function __construct()
     {
         // Initialize your context here
     }

@@ -3,6 +3,7 @@ Feature: A list of pizzas
    As a builder
    I should be able to list existing Pizzas
 
+   @javascript
    Scenario: Viewing pizza list
       Given I am signed in
       When I go to "/pizza/list"

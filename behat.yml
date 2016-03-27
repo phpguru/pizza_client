@@ -1,9 +1,13 @@
 default:
-    paths:
-        features: features
-        bootstrap: %behat.paths.features%/bootstrap
+    autoload:
+        '': %paths.base%/features/bootstrap
     extensions:
-        Behat\MinkExtension\Extension:
+        Behat\MinkExtension:
             base_url: http://pizza.dev:81
             goutte: ~
             selenium2: ~
+    suites:
+        default:
+            contexts:
+                - FeatureContext
+                - Behat\MinkExtension\Context\MinkContext
