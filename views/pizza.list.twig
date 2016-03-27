@@ -1,0 +1,12 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h2>Pizza List</h2>
+    <ul>
+        {% for pizza in pizzas %}
+            {% if pizza.name is not empty %}
+            <li><strong>{{ pizza.name|lower|title }}</strong> <em>{{ pizza.description }}</em> 
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

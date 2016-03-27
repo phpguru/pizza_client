@@ -5,7 +5,8 @@
         "twig/twig": "^1.19",
         "symfony/twig-bridge": "^2.7",
         "guzzlehttp/guzzle": "^6.2",
-        "predis/predis": "^1.0"
+        "predis/predis": "^1.0",
+        "rebangm/silex-guzzlehttp-provider": "^1.2"
     },
     "require-dev": {
         "behat/behat": "~3.0",
