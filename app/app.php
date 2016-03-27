@@ -64,7 +64,7 @@ $app->get('pizza/list', function() use ($app){
 /**
  * Create a pizza
  */
-$app->get('pizza/create', function() use ($app) {
+$app->get('pizza/new', function() use ($app) {
     try {
         return $app['twig']->render('pizza.create.twig', array(
             'pizzas' => $pizzas
@@ -74,7 +74,7 @@ $app->get('pizza/create', function() use ($app) {
     }
 });
 
-$app->post('pizza/new', function(Request $request) use ($app) {
+$app->post('pizza/create', function(Request $request) use ($app) {
     
     // Try to create a new pizza with the given name and description
     $pizza_definition = $request->get('pizza');

@@ -6,5 +6,5 @@ Feature: Create a pizza
    @javascript
    Scenario: Creating a pizza
       Given I am signed in
-      When I go to "/pizza/create"
+      When I go to "/pizza/new"
       Then I should see name and description field

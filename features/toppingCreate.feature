@@ -6,6 +6,6 @@ Feature: Create a new Topping
    @javascript
    Scenario: Creating a topping
       Given I am signed in
-      When I go to "/topping/create"
+      When I go to "/topping/new"
       Then I should see a form to create a new topping
 
