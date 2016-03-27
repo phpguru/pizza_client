@@ -48,11 +48,13 @@ $app->get('pizza/list', function() use ($app){
 
         $pizzas = json_decode($request->getBody()->getContents(), true);
         
-        $app['session']->set('pizzas', $pizzas);
+        $app['session']->set('pizzas.all', $pizzas);
+        $app['session']->set('pizzas.my', [91,95]);
         
         
         return $app['twig']->render('pizza.list.twig', array(
-            'pizzas' => $pizzas
+            'pizzas' => $pizzas,
+            'mypizzas' => $app['session']->get('pizzas.my')
         ));
     } catch (Exception $ex) {
         return $ex->getMessage();
