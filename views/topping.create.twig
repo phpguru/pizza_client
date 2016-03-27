@@ -1,0 +1,84 @@
+{% extends 'layout.twig' %}    
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="pull-right">
+                <img src="/img/pizza.png" style="width:43%;padding-top:2em;"/>
+            </div>
+            <h1>Add a topping</h1>
+            <p class="warning">All fields are required.</p>
+            <form id="createtopping" method="post" action="/topping/create">
+              <fieldset class="form-group">
+                <label for="name">What do you want to call your topping?</label>
+                <input type="name" class="form-control" id="name" placeholder="Enter a unique name!">
+                <small class="text-muted"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                Be descriptive! Good topping names make pizza building a lot more fun.</small>
+              </fieldset>
+              <button type="submit" class="btn btn-primary">Let's do this &gt;</button>
+            </form>
+        </div> 
+    </div>
+    <div class="col-lg-1 col-lg-offset-11">
+        <a class="btn btn-orange" href="/topping/list" role="button">I give up!</a>
+    </div>
+    
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#createtopping').submit(function(event){
+    event.preventDefault();      
+    var name = $('#name').val();
+        var message = '';
+        if (name==='') {
+            message = 'A topping with no name? What does null taste like? Provide a topping so we can get going.';
+            BootstrapDialog.show({
+                title: 'Shucks!',
+                type: BootstrapDialog.TYPE_WARNING,
+                message: message,
+                buttons: [{
+                    label: 'Makes sense',
+                    action: function(dialog) {
+                        dialog.close();
+                    }
+                }]
+            });
+        } else {
+
+            var data = {
+                'topping' : {
+                    'name' : name
+                }
+            };
+            var url = '/topping/create';
+            var jqxhr = $.post( url, data, function(response) {
+                //console.log(response);
+              })
+              .done(function(response) {
+                //console.log(response);
+              })
+              .fail(function(response) {
+                //console.log(response);
+                BootstrapDialog.show({
+                    title: 'Rats! '+response.statusText,
+                    type: BootstrapDialog.TYPE_WARNING,
+                    message: response.responseJSON.error,
+                    buttons: [{
+                        label: 'Whatev',
+                        action: function(dialog) {
+                            dialog.close();
+                        }
+                    }]
+                });
+              })
+              .always(function() {
+                //alert( "finished" );
+            });
+        }
+    });
+});
+</script>
+
+{% endblock %}
+ 

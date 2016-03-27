@@ -187,6 +187,33 @@ $app->get('topping/list', function() use ($app){
     }
 });
 
+/**
+ * Create a topping
+ */
+$app->get('topping/new', function() use ($app) {
+    try {
+        return $app['twig']->render('topping.create.twig', array());        
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
