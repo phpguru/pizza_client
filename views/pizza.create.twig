@@ -2,19 +2,28 @@
 
 {% block body %}
 
-    <h1>Let's make a pizza!</h1>
-    <form id="createpizza" method="post" action="/pizza/">
-      <fieldset class="form-group">
-        <label for="name">What do you want to call your pizza?</label>
-        <input type="name" class="form-control" id="name" placeholder="Enter a cool name!">
-        <small class="text-muted">Be creative! Unique pizza names are memorable.</small>
-      </fieldset>
-      <fieldset class="form-group">
-          <label for="description">Describe your <span id="pizzaname">amazing pie<span> here...</label>
-        <textarea class="form-control" id="description" rows="3"></textarea>
-      </fieldset>
-      <button type="submit" class="btn btn-primary">Next, add some toppings &gt;</button>
-    </form>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h1>Let's make a pizza!</h1>
+            <p class="warning">All fields are required.</p>
+            <form id="createpizza" method="post" action="/pizza/">
+              <fieldset class="form-group">
+                <label for="name">What do you want to call your pizza?</label>
+                <input type="name" class="form-control" id="name" placeholder="Enter a cool name!">
+                <small class="text-muted"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                Be creative! Funny and clever pizza names are memorable and improve sales.</small>
+              </fieldset>
+              <fieldset class="form-group">
+                  <label for="description">Describe your <span id="pizzaname">amazing pie<span> here...</label>
+                <textarea class="form-control" id="description" rows="3"></textarea>
+                <small class="text-muted"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                The more descriptive, the better. It will make it much easier to find your pizza later.</small>
+              </fieldset>
+              <button type="submit" class="btn btn-primary">Next, add some toppings &gt;</button>
+            </form>
+        </div>        
+    </div>
+    
 
 <script type="text/javascript">
 $(document).ready(function () {

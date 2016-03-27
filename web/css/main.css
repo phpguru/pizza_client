@@ -10,7 +10,32 @@ body {
 h1, h2, h3, h4, h5, h6, strong {
     font-weight: 700;
 }
-
+.jumbotron p {
+    font-size: 1.2em;
+}
+input, textarea {
+    margin: 1ex 0;
+}
+.jumbotron small {
+    margin: 1ex;
+    font-size: 1em;
+    font-style: italic;
+}
+.glyphicon {
+    position: relative;
+    top: 3px;
+    font-size: 1.25em;
+    padding-right: 0.2ex;
+}
+.warning, .glyphicon {
+    color: #FF5300;
+}
+label {
+    font-size: 1.2em;
+}
+button {
+    font-size: 1.4em;
+}
 .btn-orange {
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
