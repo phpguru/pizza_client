@@ -62,13 +62,24 @@ $(document).ready(function () {
         };
         var url = '/pizza/new';
         var jqxhr = $.post( url, data, function(response) {
-            //alert( "success" );
+            console.log(response);
           })
           .done(function(response) {
             console.log(response);
           })
-          .fail(function() {
-            alert( "Whoops! An error occurred." );
+          .fail(function(response) {
+            console.log(response);
+            BootstrapDialog.show({
+                title: 'Dang It! '+response.statusText,
+                type: BootstrapDialog.TYPE_WARNING,
+                message: response.responseJSON.error,
+                buttons: [{
+                    label: 'Sigh',
+                    action: function(dialog) {
+                        dialog.close();
+                    }
+                }]
+            });
           })
           .always(function() {
             //alert( "finished" );

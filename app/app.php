@@ -75,9 +75,13 @@ $app->get('pizza/create', function() use ($app) {
 });
 
 $app->post('pizza/new', function(Request $request) use ($app) {
+    
+    // Try to create a new pizza with the given name and description
     $pizza_definition = $request->get('pizza');
     
-    $pizza = ['pizza' => $pizza_definition];
+    // What we are going to post for remote storage
+    $pizza_package = ['pizza' => $pizza_definition];
+    
     try {
         $request = $app['guzzle']->get('/pizzas');
         /* @var $request \GuzzleHttp\Psr7\Request */ // IDEHelper
@@ -88,20 +92,31 @@ $app->post('pizza/new', function(Request $request) use ($app) {
             if (trim(strtolower($existing_pizza['name'])) === trim(strtolower($pizza_definition['name'])))
             {
                 $response = new Response();
-                $response->setStatusCode(401, 'Sorry, but that pizza has already been created.');
+                /* @var $response \Symfony\Component\HttpFoundation\Request */
+                
+                $response->setStatusCode(401, 'Pizza Exists');
+                $response->headers->set('Content-Type', 'application/json');
+                $response->setContent(json_encode([
+                    'error' => 'Sorry, but that pizza has already been created.'
+                ]));
                 return $response;
-                return $app->abort(401, 'Sorry, but that pizza has already been created.');
             }
         }
+        
+        // Store remotely
         $curl_response = $app['guzzle']->request('POST', '/pizzas', [
-            'json'    => $pizza,
+            'json'    => $pizza_package,
         ]);
         
-        return $app->json($curl_response);
+        if ($curl_response) {
+            return $app->json($curl_response);        
+        } else {
+            return $app->abort(500, 'Failed to create pizza!');
+        }
         
     } catch (Exception $ex) {
 
-        return $ex->getMessage();
+        return $app->abort(500, $ex->getMessage());
 
     }
 });
