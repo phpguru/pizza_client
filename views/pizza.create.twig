@@ -1,0 +1,52 @@
+{% extends 'layout.twig' %}    
+
+{% block body %}
+
+    <h1>Let's make a pizza!</h1>
+    <form id="createpizza" method="post" action="/pizza/">
+      <fieldset class="form-group">
+        <label for="name">What do you want to call your pizza?</label>
+        <input type="name" class="form-control" id="name" placeholder="Enter a cool name!">
+        <small class="text-muted">Be creative! Unique pizza names are memorable.</small>
+      </fieldset>
+      <fieldset class="form-group">
+          <label for="description">Describe your <span id="pizzaname">amazing pie<span> here...</label>
+        <textarea class="form-control" id="description" rows="3"></textarea>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Next, add some toppings &gt;</button>
+    </form>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#createpizza').submit(function(event){
+    event.preventDefault();      
+    var name = $('#name').val();
+    var desc = $('#description').val();
+    if (name === '' || desc === '') {
+        var message = '';
+        if (name==='' && desc==='') {
+            message = 'Seriously? A pizza with no name or description? It\'ll be super hard to order that one. Try adding some details.';
+        } else if (name==='') {
+            message = 'Really? A pizza with no name? Give your pizza a name before adding toppings.';
+        } else if (desc==='') {
+            message = 'Hungry customers will want to know what\'s on the '+name+'. Give it a short description before adding toppings.';
+        }
+
+        BootstrapDialog.show({
+            title: 'Whoops!',
+            type: BootstrapDialog.TYPE_WARNING,
+            message: message,
+            buttons: [{
+                label: 'Alrighty then',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
+    }
+  });
+});
+</script>
+
+{% endblock %}
+ 

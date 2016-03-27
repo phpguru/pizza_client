@@ -34,13 +34,30 @@ $app->get('/', function () use ($app) {
     ));
 });
 
-
+/**
+ * List existing pizzas
+ */
 $app->get('pizza/list', function() use ($app){
     try {
         $request = $app['guzzle']->get('/pizzas');
         // return 'Pizzas : "Status Code "' . $request->getStatusCode() . '"  ' . $request->getBody()->getContents();
         $pizzas = json_decode($request->getBody()->getContents(), true);
-        return $app['twig']->render('pizza.list.twig', array('pizzas' => $pizzas));
+        return $app['twig']->render('pizza.list.twig', array(
+            'pizzas' => $pizzas
+        ));
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
+});
+
+/**
+ * Create a pizza
+ */
+$app->get('pizza/create', function() use ($app){
+    try {
+        return $app['twig']->render('pizza.create.twig', array(
+            'pizzas' => $pizzas
+        ));        
     } catch (Exception $ex) {
         return $ex->getMessage();
     }
