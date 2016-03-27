@@ -3,6 +3,8 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+use GuzzleHttp\Middleware;
 
 class PizzaClient extends Application
 {
@@ -53,7 +55,7 @@ $app->get('pizza/list', function() use ($app){
 /**
  * Create a pizza
  */
-$app->get('pizza/create', function() use ($app){
+$app->get('pizza/create', function() use ($app) {
     try {
         return $app['twig']->render('pizza.create.twig', array(
             'pizzas' => $pizzas
@@ -63,6 +65,18 @@ $app->get('pizza/create', function() use ($app){
     }
 });
 
+$app->post('pizza/new', function(Request $request) use ($app) {
+    $pizza_definition = $request->get('pizza');
+    $pizza = ['pizza' => $pizza_definition];
+    try {
+        $curl_response = $app['guzzle']->request('POST', '/pizzas', [
+            'json'    => $pizza,
+        ]);
+        return $app->json($curl_response);
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
+});
 
 $app->get('/help', function () use ($app) {
     return $app['twig']->render('help.twig', array(

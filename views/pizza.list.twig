@@ -11,7 +11,7 @@
                 <ul>
                     {% for pizza in pizzas %}
                         {% if pizza.name is not empty %}
-                        <li><strong>{{ pizza.name|lower|title }}</strong> <em>{{ pizza.description }}</em> 
+                        <li>{{ pizza.id }}) <strong>{{ pizza.name|lower|title }}</strong> <em>{{ pizza.description }}</em> 
                         {% endif %}
                     {% endfor %}
                 </ul>

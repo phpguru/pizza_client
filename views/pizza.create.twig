@@ -51,27 +51,22 @@ $(document).ready(function () {
                 'description': desc
             }
         };
-        var url = endpoint+'/pizzas';
-        var jqxhr = $.post( url, function(response) {
-            alert( "success" );
+        var url = '/pizza/new';
+        var jqxhr = $.post( url, data, function(response) {
+            //alert( "success" );
           })
           .done(function(response) {
-            alert( "second success" );
             console.log(response);
           })
           .fail(function() {
-            alert( "error" );
+            alert( "Whoops! An error occurred." );
           })
           .always(function() {
-            alert( "finished" );
+            //alert( "finished" );
         });
 
         // Perform other work here ...
 
-        // Set another completion function for the request above
-        jqxhr.always(function() {
-          alert( "second finished" );
-        });
     }
   });
 });
