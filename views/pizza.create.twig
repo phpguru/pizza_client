@@ -24,7 +24,10 @@
               </fieldset>
               <button type="submit" class="btn btn-primary">Next, add some toppings &gt;</button>
             </form>
-        </div>        
+        </div> 
+    </div>
+    <div class="col-lg-1 col-lg-offset-11">
+        <a class="btn btn-orange" href="/pizza/list" role="button">I give up!</a>
     </div>
     
 
@@ -65,13 +68,13 @@ $(document).ready(function () {
         };
         var url = '/pizza/create';
         var jqxhr = $.post( url, data, function(response) {
-            console.log(response);
+            //console.log(response);
           })
           .done(function(response) {
-            console.log(response);
+            //console.log(response);
           })
           .fail(function(response) {
-            console.log(response);
+            //console.log(response);
             BootstrapDialog.show({
                 title: 'Dang It! '+response.statusText,
                 type: BootstrapDialog.TYPE_WARNING,
