@@ -1,0 +1,103 @@
+{% extends 'layout.twig' %}    
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="pull-right">
+                <img src="/img/pizza.png" style="width:43%;padding-top:2em;"/>
+            </div>
+            <h1>Improve your pie...</h1>
+            <h2>{{pizza.name}}</h2>
+            <h3>{{pizza.description}}</h3>
+        </div> 
+    </div>
+
+    <div class="row"> 
+        <div class="col-lg-8 col-lg-offset-2">
+            <h3>Current Toppings</h3>
+            {% if toppings is not empty %}
+                <ul>
+            {% for topping in toppings %}
+                <li>{{topping.name}}</li>
+            {% endfor %}
+                </ul>
+            {% else %}
+                <p class="warning">None.</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-1 col-lg-offset-11">
+        <a class="btn btn-orange" href="/pizza/list" role="button">I give up!</a>
+    </div>
+    
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#createpizza').submit(function(event){
+    event.preventDefault();      
+    var name = $('#name').val();
+    var desc = $('#description').val();
+    if (name === '' || desc === '') {
+        var message = '';
+        if (name==='' && desc==='') {
+            message = 'Seriously? A pizza with no name or description? It\'ll be super hard to order that one. Try adding some details.';
+        } else if (name==='') {
+            message = 'Really? A pizza with no name? Give your pizza a name before adding toppings.';
+        } else if (desc==='') {
+            message = 'Hungry customers will want to know what\'s on the '+name+'. Give it a short description before adding toppings.';
+        }
+
+        BootstrapDialog.show({
+            title: 'Whoops!',
+            type: BootstrapDialog.TYPE_WARNING,
+            message: message,
+            buttons: [{
+                label: 'Alrighty then',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
+    } else {
+        
+        var data = {
+            'pizza' : {
+                'name' : name,
+                'description': desc
+            }
+        };
+        var url = '/pizza/create';
+        var jqxhr = $.post( url, data, function(response) {
+            //console.log(response);
+          })
+          .done(function(response) {
+            //console.log(response);
+          })
+          .fail(function(response) {
+            //console.log(response);
+            BootstrapDialog.show({
+                title: 'Dang It! '+response.statusText,
+                type: BootstrapDialog.TYPE_WARNING,
+                message: response.responseJSON.error,
+                buttons: [{
+                    label: 'Sigh',
+                    action: function(dialog) {
+                        dialog.close();
+                    }
+                }]
+            });
+          })
+          .always(function() {
+            //alert( "finished" );
+        });
+
+        // Perform other work here ...
+
+    }
+  });
+});
+</script>
+
+{% endblock %}
+ 

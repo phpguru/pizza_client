@@ -38,6 +38,17 @@ $app->get('/', function () use ($app) {
     ));
 });
 
+
+/****************************************************************\
+ *      _____ _____ ____________          _____ 
+ *     |  __ \_   _|___  /___  /   /\    / ____|
+ *     | |__) || |    / /   / /   /  \  | (___  
+ *     |  ___/ | |   / /   / /   / /\ \  \___ \ 
+ *     | |    _| |_ / /__ / /__ / ____ \ ____) |
+ *     |_|   |_____/_____/_____/_/    \_\_____/ 
+ *                                              
+\****************************************************************/
+
 /**
  * List existing pizzas
  */
@@ -120,6 +131,63 @@ $app->post('pizza/create', function(Request $request) use ($app) {
 
     }
 });
+
+/**
+ * Edit an existing pizza
+ */
+$app->get('/pizza/edit/{id}', function($id) use ($app) {
+    foreach($app['session']->get('pizzas.all') as $pizza) {
+        if ((int)$id === (int)$pizza['id']) {
+            break;
+        }
+    }
+    
+    try {
+        $fetch_toppings = $app['guzzle']->get("/pizzas/{$id}/toppings");
+        $toppings = json_decode($fetch_toppings->getBody()->getContents(), true);
+    } catch (Exception $ex) {
+
+    }
+    return $app['twig']->render('pizza.edit.twig', array(
+        'pizza' => $pizza, 
+        'toppings' => $toppings
+    ));
+});
+
+
+
+
+/****************************************************************\
+ *      _______ ____  _____  _____ _____ _   _  _____  _____ 
+ *     |__   __/ __ \|  __ \|  __ \_   _| \ | |/ ____|/ ____|
+ *        | | | |  | | |__) | |__) || | |  \| | |  __| (___  
+ *        | | | |  | |  ___/|  ___/ | | | . ` | | |_ |\___ \ 
+ *        | | | |__| | |    | |    _| |_| |\  | |__| |____) |
+ *        |_|  \____/|_|    |_|   |_____|_| \_|\_____|_____/ 
+ *                                                           
+\****************************************************************/
+
+
+
+/**
+ * List existing toppings
+ */
+$app->get('topping/list', function() use ($app){
+    try {
+        $request = $app['guzzle']->get('/toppings');
+        /* @var $request \GuzzleHttp\Psr7\Request */ // IDEHelper
+
+        $toppings = json_decode($request->getBody()->getContents(), true);
+        
+        return $app['twig']->render('topping.list.twig', array(
+            'toppings' => $toppings
+        ));
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
+});
+
+
 
 /**
  * Get help
