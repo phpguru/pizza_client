@@ -143,14 +143,28 @@ $app->get('/pizza/edit/{id}', function($id) use ($app) {
     }
     
     try {
-        $fetch_toppings = $app['guzzle']->get("/pizzas/{$id}/toppings");
-        $toppings = json_decode($fetch_toppings->getBody()->getContents(), true);
+        $fetch_pizza_toppings = $app['guzzle']->get("/pizzas/{$id}/toppings");
+        $pizza_toppings = json_decode($fetch_pizza_toppings->getBody()->getContents(), true);
+        
+        $fetch_all_toppings = $app['guzzle']->get('/toppings');
+        $all_toppings = json_decode($fetch_all_toppings->getBody()->getContents(), true);
+        
+        $more_toppings = [];
+        foreach ($all_toppings as $possible_topping) {
+            foreach ($pizza_toppings as $existing_topping) {
+                if ($possible_topping['name'] !== $existing_topping['name']) {
+                    $more_toppings[] = $possible_topping;
+                }
+            }
+        }
     } catch (Exception $ex) {
-
+        throw new \Exception ($ex->getMessage());
     }
+    
     return $app['twig']->render('pizza.edit.twig', array(
         'pizza' => $pizza, 
-        'toppings' => $toppings
+        'pizza_toppings' => $pizza_toppings,
+        'more_toppings' => $more_toppings
     ));
 });
 

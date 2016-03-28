@@ -14,21 +14,24 @@
     </div>
 
     <div class="row"> 
-        <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-4 col-lg-offset-2">
             <h3>Current Toppings</h3>
-            {% if toppings is not empty %}
+            {% if pizza_toppings is not empty %}
                 <ul>
-            {% for topping in toppings %}
-                <li>{{topping.name}}</li>
+            {% for pizza_topping in pizza_toppings %}
+                <li>{{pizza_topping.name}}</li>
             {% endfor %}
                 </ul>
             {% else %}
                 <p class="warning">None.</p>
             {% endif %}
         </div>
+        <div class="col-lg-6">
+            
+        </div>
     </div>
     <div class="col-lg-1 col-lg-offset-11">
-        <a class="btn btn-orange" href="/pizza/list" role="button">I give up!</a>
+        <a class="btn btn-orange" href="/pizza/list" role="button">Sounds Delicious!</a>
     </div>
     
 
