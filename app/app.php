@@ -188,7 +188,7 @@ $app->get('topping/list', function() use ($app){
 });
 
 /**
- * Create a topping
+ * Empty form to create a new topping
  */
 $app->get('topping/new', function() use ($app) {
     try {
@@ -198,6 +198,58 @@ $app->get('topping/new', function() use ($app) {
     }
 });
 
+/**
+ * Form post handler to create new toppings
+ */
+$app->post('topping/create', function(Request $request) use ($app) {
+    
+    // Try to create a new topping with the given name and description
+    $topping_definition = $request->get('topping');
+    
+    // What we are going to post for remote storage
+    $topping_package = ['topping' => $topping_definition];
+    
+    try {
+        
+        // Check and see if this topping already exists
+        $request = $app['guzzle']->get('/toppings');
+        /* @var $request \GuzzleHttp\Psr7\Request */ // IDEHelper
+
+        $existing_toppings = json_decode($request->getBody()->getContents(), true);
+        
+        
+        foreach($existing_toppings as $existing_topping) {
+            if (trim(strtolower($existing_topping['name'])) === trim(strtolower($topping_definition['name'])))
+            {
+                $response = new Response();
+                /* @var $response \Symfony\Component\HttpFoundation\Request */
+                
+                $response->setStatusCode(401, 'Topping Exists');
+                $response->headers->set('Content-Type', 'application/json');
+                $response->setContent(json_encode([
+                    'error' => 'Sorry, but that topping has already been created.'
+                ]));
+                return $response;
+            }
+        }
+                
+        // Store remotely
+        $curl_response = $app['guzzle']->request('POST', '/toppings', [
+            'json'    => $topping_package,
+        ]);
+        
+        if ($curl_response) {
+            return $app->json($curl_response);        
+        } else {
+            return $app->abort(500, 'Failed to create topping!');
+        }
+        
+    } catch (Exception $ex) {
+
+        return $app->abort(500, $ex->getMessage());
+
+    }
+});
 
 
 

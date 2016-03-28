@@ -21,7 +21,7 @@
         </div> 
     </div>
     <div class="col-lg-1 col-lg-offset-11">
-        <a class="btn btn-orange" href="/topping/list" role="button">I give up!</a>
+        <a class="btn btn-orange" href="/topping/list" role="button">That's enough!</a>
     </div>
     
 
@@ -56,7 +56,19 @@ $(document).ready(function () {
                 //console.log(response);
               })
               .done(function(response) {
-                //console.log(response);
+                console.log(response);
+                BootstrapDialog.show({
+                    title: 'Woohoo! ',
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    message: 'Your topping has been added.',
+                    buttons: [{
+                        label: 'Nice',
+                        action: function(dialog) {
+                            dialog.close();
+                            $('#name').val('');
+                        }
+                    }]
+                });
               })
               .fail(function(response) {
                 //console.log(response);
@@ -65,7 +77,7 @@ $(document).ready(function () {
                     type: BootstrapDialog.TYPE_WARNING,
                     message: response.responseJSON.error,
                     buttons: [{
-                        label: 'Whatev',
+                        label: 'Got it',
                         action: function(dialog) {
                             dialog.close();
                         }
