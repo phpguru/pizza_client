@@ -6,15 +6,15 @@
         "symfony/twig-bridge": "^2.7",
         "guzzlehttp/guzzle": "^6.2",
         "predis/predis": "^1.0",
-        "rebangm/silex-guzzlehttp-provider": "^1.2",
-        "heroku/heroku-buildpack-php": "^99.0"
+        "rebangm/silex-guzzlehttp-provider": "^1.2"
     },
     "require-dev": {
         "behat/behat": "~3.0",
         "fabpot/goutte": "3.1@stable",
         "behat/mink-extension": "~2.0@dev",
         "behat/mink-goutte-driver": "~1.2",
-        "behat/mink-selenium2-driver": "~1.2"
+        "behat/mink-selenium2-driver": "~1.2",
+        "heroku/heroku-buildpack-php": "^99.0"
     },
     "config": {
         "bin-dir": "bin/"
