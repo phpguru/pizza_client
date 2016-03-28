@@ -26,74 +26,87 @@
                 <p class="warning">None.</p>
             {% endif %}
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4 col-lg-offset-1">
             <h3>Add Toppings</h3>
             
-            <form>
-              <fieldset class="form-group">
-                <label for="add_toppings">Select Toppings</label>
-                {% for more_topping in more_toppings %}
-                    {% if more_topping.name is not empty %}
-                <div class="checkbox">
-                  <label>
-                      <input type="checkbox" value="add_toppings[{{more_topping.id}}]"> {{more_topping.name}}
-                  </label>
-                </div>
-                  {% endif %}
-                {% endfor %}
-                <small class="text-muted">Don't go overboard or it won't cook right.</small>
+            <form id="addpizzatoppings">
+                <input type="hidden" name="pizza" id="pizza" value="{{pizza.id}}"/>
+                <fieldset class="form-group">
+                  <label for="topping">Select a topping to add</label>
+                  <select class="form-control" name="topping" id="topping">
+                        {% for more_topping in more_toppings %}
+                            {% if more_topping.name is not empty %}
+                        <div class="checkbox">
+                          <label>
+                              <option value="{{more_topping.id}}">{{more_topping.name}}</option>
+                          </label>
+                        </div>
+                          {% endif %}
+                        {% endfor %}
+                    </select>
+                  </fieldset>
               </fieldset>
-              <button type="submit" class="btn btn-primary">Add these</button>
+              <button type="submit" class="btn btn-primary">Add to {{pizza.name}}</button>
             </form>            
             
         </div>
     </div>
-    <div class="col-lg-1 col-lg-offset-11">
-        <a class="btn btn-orange" href="/pizza/list" role="button">Sounds Delicious!</a>
+    <div class="row">
+        <p>&nbsp;</p>
     </div>
-    
+    <div class="row">
+        <div class="col-lg-1 col-lg-offset-8">
+            <a class="btn btn-orange" href="/topping/new" role="button">Add Toppings</a>
+        </div>
+        <div class="col-lg-1 col-lg-offset-1">
+            <a class="btn btn-orange" href="/pizza/list" role="button">List Pizzas</a>
+        </div>
+    </div>
 
 <script type="text/javascript">
 $(document).ready(function () {
-  $('#createpizza').submit(function(event){
-    event.preventDefault();      
-    var name = $('#name').val();
-    var desc = $('#description').val();
-    if (name === '' || desc === '') {
-        var message = '';
-        if (name==='' && desc==='') {
-            message = 'Seriously? A pizza with no name or description? It\'ll be super hard to order that one. Try adding some details.';
-        } else if (name==='') {
-            message = 'Really? A pizza with no name? Give your pizza a name before adding toppings.';
-        } else if (desc==='') {
-            message = 'Hungry customers will want to know what\'s on the '+name+'. Give it a short description before adding toppings.';
-        }
-
+  $('#addpizzatoppings').submit(function(event){
+    event.preventDefault();
+    
+    var pizza_id = $('#pizza').val(); 
+    var topping_id = $('#topping').val();
+    
+    if (typeof(topping_id) === 'undefined') {
+        message = 'Hungry customers will want more than just dough and sauce. Pick some toppings.';
         BootstrapDialog.show({
             title: 'Whoops!',
             type: BootstrapDialog.TYPE_WARNING,
             message: message,
             buttons: [{
-                label: 'Alrighty then',
+                label: 'My bad',
                 action: function(dialog) {
                     dialog.close();
                 }
             }]
         });
     } else {
-        
         var data = {
-            'pizza' : {
-                'name' : name,
-                'description': desc
-            }
+            'topping_id' : topping_id,
+            'pizza_id'   : pizza_id
         };
-        var url = '/pizza/create';
+        var url = '/pizza/topping';
         var jqxhr = $.post( url, data, function(response) {
             //console.log(response);
           })
           .done(function(response) {
             //console.log(response);
+            BootstrapDialog.show({
+                title: 'Woohoo! ',
+                type: BootstrapDialog.TYPE_SUCCESS,
+                message: 'Your topping has been added to the pizza.',
+                buttons: [{
+                    label: 'Nice',
+                    action: function(dialog) {
+                        dialog.close();
+                        window.location.href = window.location.href;
+                    }
+                }]
+            });
           })
           .fail(function(response) {
             //console.log(response);
@@ -112,9 +125,6 @@ $(document).ready(function () {
           .always(function() {
             //alert( "finished" );
         });
-
-        // Perform other work here ...
-
     }
   });
 });

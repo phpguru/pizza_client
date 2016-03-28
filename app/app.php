@@ -173,6 +173,28 @@ $app->get('/pizza/edit/{id}', function($id) use ($app) {
 });
 
 
+$app->post('/pizza/topping', function (Request $request) use ($app) {
+    $topping_id = $request->get('topping_id');
+    $pizza_id = $request->get('pizza_id');
+    $pizza_topping = [
+        'topping_id' => $topping_id
+    ];
+    try {
+        // Store remotely
+        $curl_response = $app['guzzle']->request('POST', "/pizzas/{$pizza_id}/toppings", [
+            'json'    => $pizza_topping,
+        ]);
+        
+        if ($curl_response) {
+            return $app->json($curl_response);        
+        } else {
+            return $app->abort(500, 'Failed to create pizza!');
+        }
+    } catch (\Exception $ex) {
+        throw new \Exception ($ex->getMessage());
+    }
+});
+
 
 
 /****************************************************************\
