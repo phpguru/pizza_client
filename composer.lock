@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c0eaf6949620dcd1f117e85bdc23a3e6",
-    "content-hash": "f64169bf8d7d76e1e0d97e77fc53495f",
+    "hash": "b290dc23de5a2c103fc4a7e61ce17424",
+    "content-hash": "dab6c5c388e9b2c207d9e98cf63bfad3",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -177,6 +177,50 @@
                 "uri"
             ],
             "time": "2016-02-18 21:54:00"
+        },
+        {
+            "name": "heroku/heroku-buildpack-php",
+            "version": "v99",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heroku/heroku-buildpack-php.git",
+                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
+                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/heroku-hhvm-apache2",
+                "bin/heroku-hhvm-nginx",
+                "bin/heroku-php-apache2",
+                "bin/heroku-php-nginx"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Zuelke",
+                    "email": "dz@heroku.com"
+                }
+            ],
+            "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
+            "homepage": "http://github.com/heroku/heroku-buildpack-php",
+            "keywords": [
+                "apache",
+                "apache2",
+                "foreman",
+                "heroku",
+                "hhvm",
+                "nginx",
+                "php"
+            ],
+            "time": "2016-03-23 17:39:59"
         },
         {
             "name": "monolog/monolog",
@@ -1551,50 +1595,6 @@
                 "scraper"
             ],
             "time": "2015-06-24 16:11:31"
-        },
-        {
-            "name": "heroku/heroku-buildpack-php",
-            "version": "v99",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
-                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
-                "shasum": ""
-            },
-            "bin": [
-                "bin/heroku-hhvm-apache2",
-                "bin/heroku-hhvm-nginx",
-                "bin/heroku-php-apache2",
-                "bin/heroku-php-nginx"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Zuelke",
-                    "email": "dz@heroku.com"
-                }
-            ],
-            "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
-            "homepage": "http://github.com/heroku/heroku-buildpack-php",
-            "keywords": [
-                "apache",
-                "apache2",
-                "foreman",
-                "heroku",
-                "hhvm",
-                "nginx",
-                "php"
-            ],
-            "time": "2016-03-23 17:39:59"
         },
         {
             "name": "instaclick/php-webdriver",
