@@ -27,6 +27,24 @@
             {% endif %}
         </div>
         <div class="col-lg-6">
+            <h3>Add Toppings</h3>
+            
+            <form>
+              <fieldset class="form-group">
+                <label for="add_toppings">Select Toppings</label>
+                {% for more_topping in more_toppings %}
+                    {% if more_topping.name is not empty %}
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" value="add_toppings[{{more_topping.id}}]"> {{more_topping.name}}
+                  </label>
+                </div>
+                  {% endif %}
+                {% endfor %}
+                <small class="text-muted">Don't go overboard or it won't cook right.</small>
+              </fieldset>
+              <button type="submit" class="btn btn-primary">Add these</button>
+            </form>            
             
         </div>
     </div>

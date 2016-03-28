@@ -22,12 +22,12 @@
                 <small class="text-muted"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                 The more descriptive, the better. It will make it much easier to find your pizza later.</small>
               </fieldset>
-              <button type="submit" class="btn btn-primary">Next, add some toppings &gt;</button>
+              <button type="submit" class="btn btn-primary">Make it so</button>
             </form>
         </div> 
     </div>
     <div class="col-lg-1 col-lg-offset-11">
-        <a class="btn btn-orange" href="/pizza/list" role="button">I give up!</a>
+        <a class="btn btn-orange" href="/pizza/list" role="button">Done adding pizzas</a>
     </div>
     
 
@@ -72,6 +72,19 @@ $(document).ready(function () {
           })
           .done(function(response) {
             //console.log(response);
+                BootstrapDialog.show({
+                    title: 'Woohoo! ',
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    message: 'Your pizza has been added.',
+                    buttons: [{
+                        label: 'Nice',
+                        action: function(dialog) {
+                            dialog.close();
+                            $('#name').val('');
+                            $('#description').val('');
+                        }
+                    }]
+                });
           })
           .fail(function(response) {
             //console.log(response);

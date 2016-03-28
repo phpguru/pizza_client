@@ -148,13 +148,17 @@ $app->get('/pizza/edit/{id}', function($id) use ($app) {
         
         $fetch_all_toppings = $app['guzzle']->get('/toppings');
         $all_toppings = json_decode($fetch_all_toppings->getBody()->getContents(), true);
-        
+                
         $more_toppings = [];
         foreach ($all_toppings as $possible_topping) {
-            foreach ($pizza_toppings as $existing_topping) {
-                if ($possible_topping['name'] !== $existing_topping['name']) {
-                    $more_toppings[] = $possible_topping;
+            if (count($pizza_toppings)) {
+                foreach ($pizza_toppings as $existing_topping) {
+                    if ($possible_topping['name'] !== $existing_topping['name']) {
+                        $more_toppings[] = $possible_topping;
+                    }
                 }
+            } else {
+                $more_toppings[] = $possible_topping;
             }
         }
     } catch (Exception $ex) {
