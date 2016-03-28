@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-1">
+            <div class="col-lg-7 col-lg-offset-1">
                 <h1>Topping List</h1>
                 <ul>
                     {% for topping in toppings %}
@@ -14,10 +14,16 @@
                 </ul>
             </div>
             <div class="col-lg-1 col-lg-offset-1">
+                <a class="btn btn-orange" href="/pizza/new" role="button">Create a Pizza</a>
+            </div>
+            <div class="col-lg-1 col-lg-offset-1">
                 <a class="btn btn-orange" href="/topping/new" role="button">Create a Topping</a>
             </div>
         </div>
-        <div class="col-lg-1 col-lg-offset-11">
+        <div class="col-lg-1 col-lg-offset-9">
+            <a class="btn btn-orange" href="/pizza/new" role="button">Create a Pizza</a>
+        </div>
+        <div class="col-lg-1 col-lg-offset-1">
             <a class="btn btn-orange" href="/topping/new" role="button">Create a Topping</a>
         </div>
     </div>
